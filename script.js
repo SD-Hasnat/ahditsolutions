@@ -107,6 +107,39 @@ if (pfCards.length) {
   });
 }
 
+/* ---------- Insights: article reader overlay (home page) ---------- */
+const reader = document.getElementById('reader');
+if (reader) {
+  const readerPanel = document.getElementById('readerPanel');
+  const readerBody  = document.getElementById('readerBody');
+  const readerClose = document.getElementById('readerClose');
+  const openArticle = post => {
+    const src = document.getElementById(post.dataset.article);
+    if (!src) return;
+    readerBody.innerHTML = src.innerHTML;
+    readerPanel.scrollTop = 0;
+    reader.classList.add('open');
+    reader.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeReader = () => {
+    reader.classList.remove('open');
+    reader.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+  document.querySelectorAll('.post[data-article]').forEach(post => {
+    post.addEventListener('click', () => openArticle(post));
+    post.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openArticle(post); }
+    });
+  });
+  reader.addEventListener('click', e => { if (e.target === reader) closeReader(); });
+  if (readerClose) readerClose.addEventListener('click', closeReader);
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && reader.classList.contains('open')) closeReader();
+  });
+}
+
 /* ---------- Project form -> WhatsApp brief ---------- */
 const form = document.getElementById('projectForm');
 if (form) form.addEventListener('submit', e => {

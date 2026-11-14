@@ -451,6 +451,29 @@ footer h4{color:#fff;font-size:1rem;font-weight:700;margin-bottom:17px}
 .pf-lb-close{position:absolute;top:18px;right:22px;z-index:2;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:var(--navy);font-size:1.7rem;line-height:1;font-family:'Space Grotesk';font-weight:700;cursor:pointer;box-shadow:0 12px 28px rgba(0,0,0,.35);transition:.25s}
 .pf-lb-close:hover{background:var(--azure);color:#fff;transform:rotate(90deg)}
 
+/* ---------- Official logo ---------- */
+.brand-logo{height:46px;width:auto;display:block}
+.logo-chip{background:#fff;padding:10px 14px;border-radius:12px;box-shadow:0 10px 24px rgba(0,0,0,.25)}
+@media(max-width:720px){.brand-logo{height:38px}}
+
+/* ---------- Selected Work: tall portfolio screenshots ---------- */
+.sel-img img.sel-shot{object-position:top center}
+
+/* ---------- Insights article reader ---------- */
+.post{cursor:pointer}
+.article-src{display:none}
+.reader{position:fixed;inset:0;z-index:210;background:rgba(7,30,66,.82);display:none;align-items:center;justify-content:center;padding:20px}
+.reader.open{display:flex}
+.reader-panel{background:#fff;width:94vw;max-width:760px;max-height:86vh;border-radius:14px;overflow-y:auto;overflow-x:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45);padding:42px 46px}
+.reader-close{position:absolute;top:18px;right:22px;z-index:2;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:var(--navy);font-size:1.7rem;line-height:1;font-family:'Space Grotesk';font-weight:700;cursor:pointer;box-shadow:0 12px 28px rgba(0,0,0,.35);transition:.25s}
+.reader-close:hover{background:var(--azure);color:#fff;transform:rotate(90deg)}
+.reader-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:.8rem;color:var(--grey);font-weight:600;margin-bottom:16px}
+.reader-meta .pm-cat{color:var(--azure);background:rgba(46,124,246,.09);border:1px solid rgba(46,124,246,.16);text-transform:uppercase;letter-spacing:.1em;font-weight:700;font-size:.66rem;padding:5px 11px;border-radius:999px}
+.reader-body h3{font-size:1.7rem;font-weight:700;line-height:1.25;margin-bottom:18px;color:var(--deep)}
+.reader-body h4{font-size:1.15rem;font-weight:700;margin:26px 0 10px;color:var(--deep)}
+.reader-body p{color:#3D4F6B;font-size:1rem;line-height:1.78;margin-bottom:16px}
+@media(max-width:720px){.reader-panel{padding:30px 22px;max-height:84vh}.reader-body h3{font-size:1.45rem}}
+
 @media(max-width:1020px){
   .pf-grid{grid-template-columns:repeat(2,1fr)}
 }
