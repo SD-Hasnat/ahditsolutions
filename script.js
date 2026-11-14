@@ -50,18 +50,62 @@ document.querySelectorAll('.faq-q').forEach(btn => btn.addEventListener('click',
   if (!wasOpen) item.classList.add('open');
 }));
 
-/* ---------- Portfolio filter ---------- */
-const filterBtns = document.querySelectorAll('.filter-btn');
-const workCards = document.querySelectorAll('.work[data-cat]');
-filterBtns.forEach(btn => btn.addEventListener('click', () => {
-  filterBtns.forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const f = btn.dataset.filter;
-  workCards.forEach(card => {
-    const show = f === 'all' || card.dataset.cat.split(' ').includes(f);
-    card.classList.toggle('hide', !show);
+/* ---------- Website portfolio: category filters + "More" + preview lightbox ---------- */
+const pfBtns = document.querySelectorAll('.pf-filter');
+const pfCards = Array.from(document.querySelectorAll('.pf-card'));
+const pfMore = document.getElementById('pfMore');
+if (pfCards.length) {
+  const PF_PAGE_SIZE = 12;
+  let pfFilter = 'all', pfShown = PF_PAGE_SIZE;
+
+  const pfApply = () => {
+    let seen = 0, total = 0;
+    pfCards.forEach(card => {
+      const match = pfFilter === 'all' || card.dataset.cat === pfFilter;
+      if (match) total++;
+      const visible = match && ++seen <= pfShown;
+      card.classList.toggle('pf-hidden', !visible);
+    });
+    if (pfMore) pfMore.style.display = total > pfShown ? '' : 'none';
+  };
+
+  pfBtns.forEach(btn => btn.addEventListener('click', () => {
+    pfBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    pfFilter = btn.dataset.pfFilter;
+    pfShown = PF_PAGE_SIZE;
+    pfApply();
+  }));
+
+  if (pfMore) pfMore.addEventListener('click', () => { pfShown += PF_PAGE_SIZE; pfApply(); });
+  pfApply();
+
+  /* Click a project -> large preview lightbox */
+  const pfLightbox = document.getElementById('pfLightbox');
+  const pfLbPanel = document.getElementById('pfLbPanel');
+  const pfLbImg = document.getElementById('pfLbImg');
+  const pfLbClose = document.getElementById('pfLbClose');
+  const pfOpen = card => {
+    const img = card.querySelector('img');
+    pfLbImg.src = img.getAttribute('src');
+    pfLbImg.alt = img.getAttribute('alt') || '';
+    pfLbPanel.scrollTop = 0;
+    pfLightbox.classList.add('open');
+    pfLightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+  const pfClose = () => {
+    pfLightbox.classList.remove('open');
+    pfLightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+  pfCards.forEach(card => card.addEventListener('click', () => pfOpen(card)));
+  pfLightbox.addEventListener('click', e => { if (e.target === pfLightbox) pfClose(); });
+  if (pfLbClose) pfLbClose.addEventListener('click', pfClose);
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && pfLightbox.classList.contains('open')) pfClose();
   });
-}));
+}
 
 /* ---------- Project form -> WhatsApp brief ---------- */
 const form = document.getElementById('projectForm');

@@ -416,3 +416,45 @@ footer h4{color:#fff;font-size:1rem;font-weight:700;margin-bottom:17px}
   .svc-ticks{grid-template-columns:1fr}
   .btn{padding:0 26px}
 }
+
+/* ---------- School featured block (portfolio page) ---------- */
+.school-block{max-width:1020px;margin:0 auto}
+@media(min-width:721px){
+  .school-block .work{flex-direction:row}
+  .school-block .work-visual{flex:0 0 44%}
+  .school-block .work-visual img{height:100%;aspect-ratio:auto}
+}
+
+/* ---------- Website projects portfolio (hover-scroll cards) ---------- */
+.pf-h2{font-size:clamp(2rem,3.6vw,2.9rem);font-weight:700;margin-top:20px}
+.pf-intro{color:var(--grey);font-size:1.02rem;max-width:720px;margin:18px 0 40px}
+.pf-filters{display:flex;gap:11px;flex-wrap:wrap;margin-bottom:48px}
+.pf-filter{font-family:'Space Grotesk';font-weight:600;font-size:.92rem;padding:12px 24px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--navy);cursor:pointer;transition:.25s}
+.pf-filter:hover{border-color:rgba(46,124,246,.45);transform:translateY(-2px)}
+.pf-filter.active{background:var(--grad);color:#fff;border-color:transparent}
+.pf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:38px 30px}
+.pf-card{cursor:pointer}
+.pf-frame{position:relative;aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:#EEF3FA;border:1px solid var(--line);box-shadow:var(--shadow-soft);transition:box-shadow .3s}
+.pf-card:hover .pf-frame{box-shadow:var(--shadow-card)}
+.pf-frame img{position:absolute;left:0;top:0;width:100%;height:auto;display:block;transition:top 4s ease,transform 4s ease}
+.pf-card:hover .pf-frame img{top:100%;transform:translateY(-100%)}
+.pf-title{font-family:'Space Grotesk';font-weight:600;font-size:1.05rem;color:var(--navy);margin-top:14px;transition:color .25s}
+.pf-card:hover .pf-title{color:var(--azure)}
+.pf-hidden{display:none!important}
+.pf-more-wrap{text-align:center;margin-top:52px}
+
+/* ---------- Project preview lightbox ---------- */
+.pf-lightbox{position:fixed;inset:0;z-index:200;background:rgba(7,30,66,.82);display:none;align-items:center;justify-content:center;padding:20px}
+.pf-lightbox.open{display:flex}
+.pf-lb-panel{background:#fff;width:94vw;max-width:1020px;height:86vh;border-radius:14px;overflow-y:auto;overflow-x:hidden;box-shadow:0 40px 90px rgba(0,0,0,.45)}
+.pf-lb-panel img{width:100%;height:auto;display:block}
+.pf-lb-close{position:absolute;top:18px;right:22px;z-index:2;width:48px;height:48px;border-radius:50%;border:0;background:#fff;color:var(--navy);font-size:1.7rem;line-height:1;font-family:'Space Grotesk';font-weight:700;cursor:pointer;box-shadow:0 12px 28px rgba(0,0,0,.35);transition:.25s}
+.pf-lb-close:hover{background:var(--azure);color:#fff;transform:rotate(90deg)}
+
+@media(max-width:1020px){
+  .pf-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:720px){
+  .pf-grid{grid-template-columns:1fr}
+  .pf-lb-panel{height:82vh}
+}
