@@ -43,22 +43,6 @@ const io = new IntersectionObserver(entries => entries.forEach(e => {
 }), { threshold: .12 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-/* ---------- Count-up stats (real work numbers only) ---------- */
-function countUp(el) {
-  const target = parseInt(el.dataset.count, 10);
-  if (isNaN(target)) return;
-  const dur = 1500, start = performance.now();
-  (function tick(now) {
-    const p = Math.min((now - start) / dur, 1);
-    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))).toLocaleString('en-US');
-    if (p < 1) requestAnimationFrame(tick);
-  })(start);
-}
-const cio = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting) { countUp(e.target); cio.unobserve(e.target); }
-}), { threshold: .5 });
-document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
-
 /* ---------- FAQ accordion ---------- */
 document.querySelectorAll('.faq-q').forEach(btn => btn.addEventListener('click', () => {
   const item = btn.parentElement, wasOpen = item.classList.contains('open');
